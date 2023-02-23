@@ -23,7 +23,15 @@ const options = {
 const list = require('./list.json');
 const fuse = new Fuse(list, options);
 
-// Change the pattern
-const pattern = "DaVinch"
+process.stdin.resume();
+process.stdin.setEncoding("utf8");
+var lines = [];
+var reader = require("readline").createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
 
-console.log(fuse.search(pattern))
+reader.question("search word? : ", ans => {
+  console.log(fuse.search(ans));
+});
+
