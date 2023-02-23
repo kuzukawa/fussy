@@ -1,8 +1,10 @@
+import fs from 'node:fs';
+import readline from 'node:readline';
+import process from 'node:process';
 import Fuse from 'fuse.js';
-import fs from 'fs';
-import readline from 'readline';
 
 const options = {
+  // Options for Fuse.js
   // isCaseSensitive: false,
   // includeScore: false,
   // shouldSort: true,
@@ -17,23 +19,23 @@ const options = {
   // ignoreFieldNorm: false,
   // fieldNormWeight: 1,
   keys: [
-    "title",
-    "author.firstName"
-  ]
+    'title',
+    'author.firstName',
+  ],
 };
 
-const list = JSON.parse(fs.readFileSync("./list.json", {encoding: 'utf-8'}));
+const list = JSON.parse(fs.readFileSync('./list.json', {encoding: 'utf8'}));
 const fuse = new Fuse(list, options);
 
 process.stdin.resume();
-process.stdin.setEncoding("utf8");
+process.stdin.setEncoding('utf8');
 
-let reader = readline.createInterface({
+const reader = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
-reader.question("search word? : ", ans => {
+reader.question('search word? : ', ans => {
   console.log(fuse.search(ans));
   reader.close();
 });
