@@ -25,7 +25,7 @@ const fuse = new Fuse(list, options);
 
 process.stdin.resume();
 process.stdin.setEncoding("utf8");
-let lines = [];
+
 let reader = require("readline").createInterface({
   input: process.stdin,
   output: process.stdout,
