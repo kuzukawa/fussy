@@ -1,4 +1,6 @@
-const Fuse = require('fuse.js');
+import Fuse from 'fuse.js';
+import fs from 'fs';
+import readline from 'readline';
 
 const options = {
   // isCaseSensitive: false,
@@ -20,13 +22,13 @@ const options = {
   ]
 };
 
-const list = require('./list.json');
+const list = JSON.parse(fs.readFileSync("./list.json", {encoding: 'utf-8'}));
 const fuse = new Fuse(list, options);
 
 process.stdin.resume();
 process.stdin.setEncoding("utf8");
 
-let reader = require("readline").createInterface({
+let reader = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
