@@ -25,13 +25,14 @@ const fuse = new Fuse(list, options);
 
 process.stdin.resume();
 process.stdin.setEncoding("utf8");
-var lines = [];
-var reader = require("readline").createInterface({
+let lines = [];
+let reader = require("readline").createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
 reader.question("search word? : ", ans => {
   console.log(fuse.search(ans));
+  reader.close();
 });
 
